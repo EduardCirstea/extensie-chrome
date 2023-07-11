@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import axios from 'axios'
 import { Response, Spinner } from '../components'
 
@@ -7,11 +7,10 @@ const Home = () => {
     url: '',
     description: '',
   })
-  const [data, setData] = useState('hello world')
+  const [data, setData] = useState('')
   const [loading, setLoading] = useState(false)
   const { url, description } = formData
 
-  const response = true
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -26,16 +25,27 @@ const Home = () => {
     setData('')
     setTimeout(() => {
       setLoading(false)
-    }, 500)
+    }, 100)
   }
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault()
-    // const userData = {
-    //   email,
-    //   password,
-    // }
+    try {
+      const embedResponse = await axios.post(
+        'https://aion.testenv.ro/api/embed',
+        { url: url }
+      )
+      const askResponse = await axios.post('https://aion.testenv.ro/api/ask', {
+        collection: embedResponse.data.collection,
+        question: description,
+      })
+      console.log(askResponse.data.text)
+      setData(askResponse.data.text)
+    } catch (error) {
+      console.error(error)
+    }
   }
+
   if (loading) {
     return <Spinner />
   } else {
@@ -72,7 +82,7 @@ const Home = () => {
             <button className="btn btn-block">Submit</button>
           </div>
         </form>
-        {response && <Response response={data} handleClick={handleClick} />}
+        {data !== '' && <Response response={data} handleClick={handleClick} />}
       </section>
     )
   }

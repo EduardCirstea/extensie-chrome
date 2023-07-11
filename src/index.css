@@ -9,6 +9,8 @@
 html,
 body {
   font-family: 'Roboto', sans-serif;
+  width: 400px;
+  height: 100vh;
 }
 
 a {
@@ -53,7 +55,10 @@ li {
 }
 
 .form-group textarea {
-  height: 100px;
+  max-height: 100px;
+  min-height: 100px;
+  min-width: 100%;
+  max-width: 100%;
 }
 
 .form-group label {

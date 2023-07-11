@@ -20,10 +20,7 @@ globalStyles.innerHTML = `
   }
 `
 rootElement.appendChild(globalStyles)
-
-const root = ReactDOM.createRoot(document.getElementById('react-chrome-app'))
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-)
+document.body.appendChild(rootElement)
+const root = ReactDOM.createRoot(rootElement)
+// const root = ReactDOM.createRoot(document.getElementById('root'))
+root.render(<App />)

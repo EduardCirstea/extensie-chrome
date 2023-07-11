@@ -1,21 +1,23 @@
 {
-  "name": "Getting Started Example",
-  "description": "Build an Extension!",
+  "name": "AION ",
+  "description": "some powerful toy",
   "version": "1.0",
   "manifest_version": 3,
-  "icons": {
-    "16": "./logo192.png",
-    "32": "./logo192.png",
-    "48": "./logo192.png",
-    "128": "./logo192.png"
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "Open the popup"
   },
-  "content_scripts": [
+  "icons": {
+    "16": "logo192.png",
+    "48": "logo192.png",
+    "128": "logo192.png"
+  },
+  "web_accessible_resources": [
     {
-      "js": ["scripts/content.js"],
-      "matches": [
-        "https://developer.chrome.com/docs/extensions/*",
-        "https://developer.chrome.com/docs/webstore/*"
-      ]
+      "resources": ["proxy.html"],
+      "matches": ["https://*/*"]
     }
-  ]
+  ],
+  "permissions": ["tabs", "proxy"],
+  "host_permissions": ["https://aion.testenv.ro/*", "http://*/*", "https://*/*"]
 }
